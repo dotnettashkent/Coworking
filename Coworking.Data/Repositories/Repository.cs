@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Coworking.Data.Repositories
 {
+#pragma warning disable
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : Auditable
     {
         private readonly AppDbContext context;
@@ -21,24 +22,25 @@ namespace Coworking.Data.Repositories
             return await this.DeleteAsync(entity);
         }
 
-        public Task<IQueryable<TEntity>> GetAllAsync()
+        public async Task<IEnumerable<TEntity>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await dbSet.ToListAsync();
         }
 
-        public Task<TEntity> GetAsync(long id)
+        public async Task<TEntity> GetAsync(long id)
         {
-            throw new NotImplementedException();
+            return await dbSet.FindAsync(id);
         }
 
-        public Task<TEntity> InsertAsync(TEntity entity)
+        public async Task<TEntity> InsertAsync(TEntity entity)
         {
-            throw new NotImplementedException();
+            return (await dbSet.AddAsync(entity)).Entity;
         }
 
-        public Task<TEntity> UpdateAsync(TEntity entity)
+        public async Task<TEntity> UpdateAsync(TEntity entity)
         {
-            throw new NotImplementedException();
+            var result = dbSet.Update(entity);
+            return result.Entity;
         }
     }
 }

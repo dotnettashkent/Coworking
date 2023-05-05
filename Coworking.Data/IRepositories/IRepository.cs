@@ -6,6 +6,6 @@
         Task<TEntity> UpdateAsync(TEntity entity);
         Task<bool> DeleteAsync(TEntity entity);
         Task<TEntity> GetAsync(long id);
-        Task<IQueryable<TEntity>> GetAllAsync();
+        Task<IEnumerable<TEntity>> GetAllAsync();
     }
 }
