@@ -1,6 +1,4 @@
-﻿using Coworking.Domain.Enums;
-
-namespace Coworking.Service.DTOs
+﻿namespace Coworking.Service.DTOs
 {
     public class UserUpdateDto
     {

@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Coworking.Data\Coworking.Data.csproj" />
     <ProjectReference Include="..\Coworking.Domain\Coworking.Domain.csproj" />
   </ItemGroup>
 
