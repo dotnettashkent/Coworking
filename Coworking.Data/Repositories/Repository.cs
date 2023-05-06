@@ -43,6 +43,9 @@ namespace Coworking.Data.Repositories
             return (await dbSet.AddAsync(entity)).Entity;
         }
 
+        public async Task SaveChangesAsync()
+            => await context.SaveChangesAsync();
+
         public async Task<TEntity> UpdateAsync(TEntity entity)
         {
             var result = dbSet.Update(entity);

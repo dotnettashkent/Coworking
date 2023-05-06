@@ -10,5 +10,6 @@ namespace Coworking.Data.IRepositories
         Task<TEntity> GetAsync(long id);
         Task<IEnumerable<TEntity>> GetAllAsync();
         Task<TEntity> CheckingAsync(Expression<Func<TEntity, bool>> expression);
+        Task SaveChangesAsync();
     }
 }
