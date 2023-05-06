@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Coworking.Service.DTOs
+﻿namespace Coworking.Service.DTOs
 {
     public class CoworkingUpdateDto
     {
+        public long Id { get; set; }
+        public int Floor { get; set; }
+        public int Table { get; set; }
+        public int Chair { get; set; }
+        public DateTime StartAt { get; set; }
+        public DateTime? EndAt { get; set; }
     }
 }
