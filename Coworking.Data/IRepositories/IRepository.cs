@@ -1,4 +1,6 @@
-﻿namespace Coworking.Data.IRepositories
+﻿using System.Linq.Expressions;
+
+namespace Coworking.Data.IRepositories
 {
     public interface IRepository<TEntity>
     {
@@ -7,5 +9,7 @@
         Task<bool> DeleteAsync(TEntity entity);
         Task<TEntity> GetAsync(long id);
         Task<IEnumerable<TEntity>> GetAllAsync();
+        Task<TEntity> CheckingAsync(Expression<Func<TEntity, bool>> expression);
+        Task SaveChangesAsync();
     }
 }

@@ -2,6 +2,7 @@
 using Coworking.Data.IRepositories;
 using Coworking.Domain.Commons;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace Coworking.Data.Repositories
 {
@@ -15,6 +16,11 @@ namespace Coworking.Data.Repositories
         {
             this.context = context;
             this.dbSet = context.Set<TEntity>();
+        }
+
+        public async Task<TEntity> CheckingAsync(Expression<Func<TEntity, bool>> expression)
+        {
+            return await dbSet.FirstOrDefaultAsync(expression);
         }
 
         public async Task<bool> DeleteAsync(TEntity entity)
@@ -36,6 +42,9 @@ namespace Coworking.Data.Repositories
         {
             return (await dbSet.AddAsync(entity)).Entity;
         }
+
+        public async Task SaveChangesAsync()
+            => await context.SaveChangesAsync();
 
         public async Task<TEntity> UpdateAsync(TEntity entity)
         {
