@@ -29,13 +29,13 @@ namespace Coworking.Service.Services
         {
             var example = await this.repository.GetAsync(id);
 
-            if (example != null) 
+            if (example != null)
             {
                 await this.repository.DeleteAsync(example);
                 return true;
             }
             return false;
-            throw new CoworkingException(404,"Not found...");
+            throw new CoworkingException(404, "Not found...");
         }
 
         public async ValueTask<IEnumerable<CoworkingResultDto>> GetAllAsync()
@@ -47,8 +47,8 @@ namespace Coworking.Service.Services
         public async ValueTask<CoworkingResultDto> GetByIdAsync(long id)
         {
             var first = await this.repository.GetAsync(id);
-            if(first == null)
-                throw new CoworkingException(404,$"Could not find {id}");
+            if (first == null)
+                throw new CoworkingException(404, $"Could not find {id}");
 
             return mapper.Map<CoworkingResultDto>(first);
         }
@@ -56,7 +56,7 @@ namespace Coworking.Service.Services
         public async ValueTask<CoworkingResultDto> UpdateAsync(CoworkingUpdateDto dto)
         {
             var exaple = await this.repository.GetAsync(dto.Id);
-            if(exaple == null)
+            if (exaple == null)
             {
                 return null;
                 throw new CoworkingException(404, "Not found...");

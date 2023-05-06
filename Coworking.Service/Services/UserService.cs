@@ -17,6 +17,18 @@ namespace Coworking.Service.Services
             this.mapper = mapper;
         }
 
+        public async ValueTask<UserResultDto> CheckUserAsync(string email, string password = null)
+        {
+            var user = await this.repository.CheckingAsync(user => user.Email == email);
+
+            if (user == null)
+            {
+                throw new CoworkingException(404, "User not found...");
+            }
+
+            return this.mapper.Map<UserResultDto>(user);
+        }
+
         public async ValueTask<UserResultDto> CreateAsync(UserCreationDto dto)
         {
             var user = mapper.Map<User>(dto);

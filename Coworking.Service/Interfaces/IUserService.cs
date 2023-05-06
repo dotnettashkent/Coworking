@@ -9,5 +9,6 @@ namespace Coworking.Service.Interfaces
         ValueTask<bool> DeleteAsync(long id);
         ValueTask<UserResultDto> GetByIdAsync(long id);
         ValueTask<IEnumerable<UserResultDto>> GetAllAsync();
+        ValueTask<UserResultDto> CheckUserAsync(string email, string password = null);
     }
 }

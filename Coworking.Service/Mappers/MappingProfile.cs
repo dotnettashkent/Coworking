@@ -6,19 +6,19 @@ namespace Coworking.Service.Mappers
 {
     public class MappingProfile : Profile
     {
-        public MappingProfile() 
+        public MappingProfile()
         {
             //User
 
-            CreateMap<User,UserCreationDto>().ReverseMap();
-            CreateMap<User,UserResultDto>().ReverseMap();
-            CreateMap<User,UserUpdateDto>().ReverseMap();
+            CreateMap<User, UserCreationDto>().ReverseMap();
+            CreateMap<User, UserResultDto>().ReverseMap();
+            CreateMap<User, UserUpdateDto>().ReverseMap();
 
             //Coworking
 
-            CreateMap<Coworkingg,CoworkingCreationDto>().ReverseMap();
-            CreateMap<Coworkingg,CoworkingUpdateDto>().ReverseMap();
-            CreateMap<Coworkingg,CoworkingResultDto>().ReverseMap();
+            CreateMap<Coworkingg, CoworkingCreationDto>().ReverseMap();
+            CreateMap<Coworkingg, CoworkingUpdateDto>().ReverseMap();
+            CreateMap<Coworkingg, CoworkingResultDto>().ReverseMap();
         }
     }
 }
