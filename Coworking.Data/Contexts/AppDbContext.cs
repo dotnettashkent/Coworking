@@ -17,13 +17,7 @@ namespace Coworking.Data.Contexts
                 optionsBuilder.UseSqlServer("DefaultConnection", b => b.MigrationsAssembly("Coworking.Api"));
             }
         }
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Coworkingg>()
-                .HasOne(u => u.User)
-                .WithOne(u => u.Coworking)
-                .HasForeignKey<User>(u => u.CoworkingId);
-        }
+        
 
     }
 }

@@ -40,7 +40,8 @@ namespace Coworking.Data.Repositories
 
         public async Task<TEntity> InsertAsync(TEntity entity)
         {
-            return (await dbSet.AddAsync(entity)).Entity;
+            var result = await dbSet.AddAsync(entity);
+            return result.Entity;
         }
 
         public async Task SaveChangesAsync()

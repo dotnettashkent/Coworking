@@ -56,6 +56,8 @@ namespace Coworking.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("UserId");
+
                     b.ToTable("Coworkings");
                 });
 
@@ -66,9 +68,6 @@ namespace Coworking.Data.Migrations
                         .HasColumnType("bigint");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
-
-                    b.Property<long>("CoworkingId")
-                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -96,25 +95,17 @@ namespace Coworking.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CoworkingId")
-                        .IsUnique();
-
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("Coworking.Domain.Entities.User", b =>
-                {
-                    b.HasOne("Coworking.Domain.Entities.Coworkingg", "Coworking")
-                        .WithOne("User")
-                        .HasForeignKey("Coworking.Domain.Entities.User", "CoworkingId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Coworking");
                 });
 
             modelBuilder.Entity("Coworking.Domain.Entities.Coworkingg", b =>
                 {
+                    b.HasOne("Coworking.Domain.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("User");
                 });
 #pragma warning restore 612, 618

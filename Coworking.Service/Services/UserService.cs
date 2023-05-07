@@ -31,21 +31,30 @@ namespace Coworking.Service.Services
 
         public async ValueTask<UserResultDto> CreateAsync(UserCreationDto dto)
         {
-            var user = mapper.Map<User>(dto);
-            user = await repository.InsertAsync(user);
-            return mapper.Map<UserResultDto>(user);
+            var existingUser = await this.repository.CheckingAsync(user => user.Email == dto.Email);
+            if (existingUser != null)
+            {
+                throw new CoworkingException(400, "User with this email already exists...");
+            }
+
+            var mappedUser = this.mapper.Map<User>(dto);
+            mappedUser = await this.repository.InsertAsync(mappedUser);
+            await this.repository.SaveChangesAsync();
+            return this.mapper.Map<UserResultDto>(mappedUser);
         }
+
 
         public async ValueTask<bool> DeleteAsync(long id)
         {
             var deletedUser = await this.repository.GetAsync(id);
-            if (deletedUser != null)
+            if (deletedUser == null)
             {
-                await repository.DeleteAsync(deletedUser);
-                return true;
+                return false;
+                throw new CoworkingException(400, "User not found...");
             }
-            return false;
-            throw new CoworkingException(400, "User not found...");
+                await repository.DeleteAsync(deletedUser);
+                await repository.SaveChangesAsync();
+                return true;
         }
 
         public async ValueTask<IEnumerable<UserResultDto>> GetAllAsync()

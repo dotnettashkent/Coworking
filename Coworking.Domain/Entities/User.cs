@@ -12,7 +12,5 @@ namespace Coworking.Domain.Entities
         public string GroupName { get; set; }
         public UserRole Role { get; set; }
 
-        public long CoworkingId { get; set; }
-        public Coworkingg Coworking { get; set; }
     }
 }
