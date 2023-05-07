@@ -17,7 +17,7 @@ namespace Coworking.Api.Controllers
         }
 
         [HttpPost]
-        public async ValueTask<IActionResult> CreateAsync(UserCreationDto dto)
+        public async ValueTask<ActionResult> CreateAsync(UserCreationDto dto)
         {
             return Ok(
                 new
@@ -37,6 +37,12 @@ namespace Coworking.Api.Controllers
                     Error = "Success",
                     Data = await this.userService.GetAllAsync()
                 });
+        }
+
+        [HttpDelete]
+        public async ValueTask<bool> DeletedAsync(long id)
+        {
+            return await userService.DeleteAsync(id);
         }
     }
 }
